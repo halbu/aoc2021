@@ -1,5 +1,26 @@
 d = [l.strip() for l in open("./data", "r") if l != "\n"] 
 
+# part 1
+bits = [[] for i in range(len(d[0]))]
+gamma = ''
+
+for i in d:
+  for j in range(len(i)):
+    if i[j] == '1':
+      bits[j].append(1)
+    else:
+      bits[j].append(0)
+
+for i in bits:
+  if i.count(1) > i.count(0):
+    gamma += '1'
+  else:
+    gamma += '0'
+
+epsilon = ''.join(['1' if e == '0' else '0' for e in list(gamma)]) # flip bits to get epsilon
+print(int(gamma, base=2) * int(epsilon, base=2)) # convert binary strs to decimal & multiply
+
+# part 2
 def filter_by_bit_criteria(my_list, pos, most_common):
   ones = zeroes = desired_bit = 0
   for e in my_list:
@@ -22,27 +43,4 @@ def find_rating(my_list, most_common):
     pos += 1
   return my_list[0]
 
-# part 1
-bits = [[] for i in range(len(d[0]))]
-gamma = ''
-
-for i in d:
-  for j in range(len(i)):
-    if i[j] == '1':
-      bits[j].append(1)
-    else:
-      bits[j].append(0)
-
-for i in bits:
-  if i.count(1) > i.count(0):
-    gamma += '1'
-  else:
-    gamma += '0'
-
-epsilon = ''.join(['1' if e == '0' else '0' for e in list(gamma)]) # flip bits to get epsilon
-print(int(gamma, base=2) * int(epsilon, base=2)) # convert binary strs to decimal & multiply
-
-# part 2
-o2_rating = find_rating(d, True)
-co2_rating = find_rating(d, False)
-print(int(o2_rating, base=2) * int(co2_rating, base=2))
+print(int(find_rating(d, True), base=2) * int(find_rating(d, False), base=2))
