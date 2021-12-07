@@ -9,20 +9,30 @@ for g in grids:
   for i in range(0, 5):
     g[i] = g[i].split()
 
-# part 1
-def check_win(grid, idx): # checks a given grid for a bingo win if all numbers up to position idx have been called
+def check_win(grid, idx): # checks a given grid for a bingo win if all numbers up to index position idx (inclusive) have been called
   for f in range(len(grid[0])):
-    if all(i in numbers[0:idx] for i in grid[f]) or all(i in numbers[0:idx] for i in [grid[x][f] for x in range(0, 5)]):
+    if all(i in numbers[0:idx+1] for i in grid[f]) or all(i in numbers[0:idx+1] for i in [grid[x][f] for x in range(0, 5)]):
       return True
 
-def find_winner(): # returns [winning grid, index of final called number]. assumption: there is always a winning grid
+def find_winner(): # returns [index of winning grid, index of final called number]. assumption: there is always a winning grid
   for i in range(1, len(numbers)):
     for j in range(len(grids)):
       if check_win(grids[j], i):
-        return [grids[j], i]
+        return [j, i]
 
+def eval_score(grid, idx):
+  unmarked_sum = sum([int(grid[i][j]) for i in range(0, 5) for j in range(0, 5) if grid[i][j] not in numbers[0:idx+1]])
+  return int(numbers[idx]) * unmarked_sum
+
+# part 1
 r = find_winner()
-wgrid = r[0] # winning grid
-cnum = numbers[0:r[1]] # list of all numbers that were called
-unmarked_sum = sum([int(wgrid[i][j]) for i in range(0, 5) for j in range(0, 5) if wgrid[i][j] not in cnum]) # hail satan
-print(str(int(cnum[len(cnum)-1]) * unmarked_sum))
+print(eval_score(grids[r[0]], r[1]))
+
+# part 2 
+while True:
+  result = find_winner()      # this is really inefficient as we start looking for
+  if (len(grids) > 1):        # wins from called_number index 0 again after each
+    grids.pop(result[0])      # pop, but perf is not bad enough (yet!) for me to care
+  else:
+    print(eval_score(grids[0], result[1]))
+    break
