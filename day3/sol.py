@@ -20,4 +20,5 @@ def find_rating(my_list, most_common):
     my_list = filter_by_bit_criteria(my_list, pos, most_common)
     pos += 1
   return my_list[0]
+  
 print(int(find_rating(d, True), base=2) * int(find_rating(d, False), base=2))
