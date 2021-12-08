@@ -2,7 +2,7 @@
 
 ### Solutions for Advent of Code 2021
 
-The primary goal is for solutions which are correct and as compact as possible while remaining reasonably performant.
+My primary aim is to produce solutions which are correct and as compact as possible while remaining reasonably performant.
 
 To this end some practices are adopted here which would be avoided in other circumstances:
 
