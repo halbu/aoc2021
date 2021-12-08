@@ -8,17 +8,16 @@ e = ''.join(['1' if e == '0' else '0' for e in list(g)]) # flip bits to get epsi
 print(int(g, base=2) * int(e, base=2)) # convert binary strs to decimal & multiply
 
 # part 2
-def filter_by_bit_criteria(my_list, pos, most_common):
-  b1 = sum([1 for e in my_list if e[pos] == '1']) # count of 1 bits
-  b0 = sum([1 for e in my_list if e[pos] == '0']) # count of 0 bits
-  bt = (1 if b1 >= b0 else 0) if most_common else 1 - (1 if b1 >= b0 else 0) # target bit
-  return [e for e in my_list if int(e[pos]) == bt]
+def filter_by_bit_criteria(l, i, most_common):
+  less_zeroes = sum([1 for e in l if e[i] == '1']) >= sum([1 for e in l if e[i] == '0'])
+  target_bit = (1 if less_zeroes else 0) if most_common else 1 - (1 if less_zeroes else 0)
+  return [e for e in l if int(e[i]) == target_bit]
 
-def find_rating(my_list, most_common):
-  pos = 0
-  while len(my_list) > 1:
-    my_list = filter_by_bit_criteria(my_list, pos, most_common)
-    pos += 1
-  return my_list[0]
+def find_rating(l, most_common):
+  i = 0
+  while len(l) > 1:
+    l = filter_by_bit_criteria(l, i, most_common)
+    i += 1
+  return l[0]
   
 print(int(find_rating(d, True), base=2) * int(find_rating(d, False), base=2))
