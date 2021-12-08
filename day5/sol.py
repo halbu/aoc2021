@@ -8,25 +8,15 @@ for l in d:
   lines.append({'x1': int(o[0]), 'y1': int(o[1]), 'x2': int(t[0]), 'y2': int(t[1])})
 
 def plot_line(l):
-  step = [0, 0]
-  if l['x1'] > l['x2']:
-    step[0] = -1
-  elif l['x1'] < l['x2']:
-    step[0] = 1
-
-  if l['y1'] > l['y2']:
-    step[1] = -1
-  elif l['y1'] < l['y2']:
-    step[1] = 1
-
-  x = l['x1']
-  y = l['y1']
+  dx = -1 if l['x1'] > l['x2'] else 1 if l['x1'] < l['x2'] else 0
+  dy = -1 if l['y1'] > l['y2'] else 1 if l['y1'] < l['y2'] else 0
+  pos = ({'x': l['x1'], 'y': l['y1']})
   
-  while not (x == l['x2'] and y == l['y2']):
-    grid[x][y] += 1
-    x += step[0]
-    y += step[1]
-  grid[x][y] += 1
+  while not (pos['x'] == l['x2'] and pos['y'] == l['y2']):
+    grid[pos['x']][pos['y']] += 1
+    pos['x'] += dx
+    pos['y'] += dy
+  grid[pos['x']][pos['y']] += 1
 
 # part 1
 grid = [[0 for i in range(1000)] for j in range(1000)]
