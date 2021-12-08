@@ -6,7 +6,7 @@ The primary goal is for solutions which are correct and as compact as possible w
 
 To this end some practices are adopted here which would be avoided in other circumstances:
 
-* Variables are given abbreviated or one-character names e.g. the variable holding the data for each problem is named `d`
+* Variables are given abbreviated or one-character names e.g. the variable holding the data for each day's problem is typically named `d`
 
 * List comprehensions are used solely for side-effects in order to produce shorter solutions in terms of sloc
 
