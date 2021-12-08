@@ -1,15 +1,10 @@
 d = [[e[0], int(e[1])] for e in [l.split() for l in open("./data", "r")]]
 
 # part 1
-position = sum([i[1] for i in d if i[0] == 'forward'])
-depth = sum([-i[1] if i[0] == 'up' else i[1] for i in [j for j in d if j[0] != 'forward']])
-
-print(position * depth)
+print(sum([i[1] for i in d if i[0][0] == 'f']) * sum([-i[1] if i[0] == 'up' else i[1] if i[0] == 'down' else 0 for i in d]))
 
 # part 2. let's swallow our pride and use a for loop
-aim = 0
-depth = 0
-position = 0
+aim = depth = position = 0
 for e in d:
   if e[0] == 'up':
     aim = aim - e[1]
