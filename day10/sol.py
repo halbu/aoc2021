@@ -1,9 +1,9 @@
 d = [(l.strip('\n')) for l in open("./data", "r")]
 o = ['(', '[', '{', '<']
 c = [')', ']', '}', '>']
-I = {')': '(', ']': '[', '}': '{', '>': '<', '(': ')', '[': ']', '{': '}', '<': '>' }
-S1 = {')': 3, ']': 57, '}': 1197, '>': 25137 }
-S2 = {')': 1, ']': 2, '}': 3, '>': 4 }
+I = {')': '(', ']': '[', '}': '{', '>': '<', '(': ')', '[': ']', '{': '}', '<': '>'}
+S1 = {')': 3, ']': 57, '}': 1197, '>': 25137}
+S2 = {')': 1, ']': 2, '}': 3, '>': 4}
 
 # part 1
 def eval_score(l):
@@ -24,9 +24,7 @@ def is_cor(l): # test string for corruption
   return eval_score(l) != None
 
 def is_inc(l): # test string for incompleteness
-  os = sum([1 for e in list(l) if e in o])
-  cs = sum([1 for e in list(l) if e in c])
-  return os != cs
+  return sum([1 for e in list(l) if e in o]) != sum([1 for e in list(l) if e in c])
 
 def find_pair(l, i):
   for j in range(i, -1, -1):
