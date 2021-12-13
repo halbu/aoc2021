@@ -1,6 +1,5 @@
 d = [(l.strip('\n')) for l in open("./data", "r")]
-o = ['(', '[', '{', '<']
-c = [')', ']', '}', '>']
+o, c = ['(', '[', '{', '<'], [')', ']', '}', '>']
 I = {')': '(', ']': '[', '}': '{', '>': '<', '(': ')', '[': ']', '{': '}', '<': '>'}
 S1 = {')': 3, ']': 57, '}': 1197, '>': 25137}
 S2 = {')': 1, ']': 2, '}': 3, '>': 4}
@@ -32,19 +31,15 @@ def find_pair(l, i):
       return [j, i] # [opener, closer]
 
 def gen_comp(l): # generate a completion string for incomplete string `l`
-  # while the list has closures in it
-  while sum([1 for e in l if e in c]) > 0:
-    # walk the list until we find the next closure
+  while sum([1 for e in l if e in c]) > 0: # while list has closures,find next closure
     found = False
     for i in range(len(l)):
       if not found:
-        if l[i] in c:
-          # go backward from there until we hit its opening pair and pop them both
+        if l[i] in c: # then go backward until its opening pair is found and pop both
           oc = find_pair(l, i)
           found = True
           l.pop(oc[1])
           l.pop(oc[0])
-
   return [I[e] for e in [l[x] for x in range(len(l)-1, -1, -1)]]
 
 def get_score(l):
