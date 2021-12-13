@@ -15,8 +15,7 @@ def fold(axis, ix):
     [merge_y(ix + i, ix - i) for i in range(1, len(g[0]) - ix)]
     for i in range(len(g)):
       g[i] = g[i][:ix]
-  
-  if axis == 'x':
+  elif axis == 'x':
     [merge_x(ix + i, ix - i) for i in range(1, len(g) - ix)]
     [g.pop() for i in range(ix, len(g))] # python doesn't like `g = g[:ix]` here
 
