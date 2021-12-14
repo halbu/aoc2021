@@ -22,4 +22,4 @@ for i in d:
     bits[j].append(int(i[j]))
 ```
     
-* Some crimes against formatting have been committed
+* Some crimes against readability and formatting have been committed
